@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.todoweb.RequestDto.ModifiedRequest;
+import org.example.todoweb.RequestDto.TodoRequest;
 
 
 import java.time.LocalDateTime;
@@ -29,8 +29,8 @@ public class TodoEntity extends BaseEntity {
         this.description = description;
     }
 
-    public void modify(ModifiedRequest modifiedRequest) {
-        this.title = modifiedRequest.getTitle();
-        this.description = modifiedRequest.getDescription();
+    public void modify(TodoRequest todoRequest) {
+        this.title = todoRequest.getTitle();
+        this.description = todoRequest.getDescription();
     }
 }

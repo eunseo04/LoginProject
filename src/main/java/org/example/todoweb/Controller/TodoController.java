@@ -1,9 +1,7 @@
 package org.example.todoweb.Controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.todoweb.RequestDto.ModifiedRequest;
 import org.example.todoweb.RequestDto.TodoRequest;
-import org.example.todoweb.ResponseDto.ModifiedResponse;
 import org.example.todoweb.ResponseDto.TodoResponse;
 import org.example.todoweb.Service.TodoService;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +25,8 @@ public class TodoController {
     }
 
     @PatchMapping
-    public ModifiedResponse update(@RequestParam Long id, @RequestBody ModifiedRequest modifiedRequest) {
-        return todoService.update(id, modifiedRequest);
+    public TodoResponse update(@RequestParam Long id, @RequestBody TodoRequest todoRequest) {
+        return todoService.update(id, todoRequest);
     }
 
     @DeleteMapping
