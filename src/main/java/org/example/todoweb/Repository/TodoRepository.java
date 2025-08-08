@@ -1,4 +1,7 @@
 package org.example.todoweb.Repository;
 
-public interface TodoRepository {
+import org.example.todoweb.Entity.TodoEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TodoRepository extends JpaRepository<TodoEntity,Long> {
 }
