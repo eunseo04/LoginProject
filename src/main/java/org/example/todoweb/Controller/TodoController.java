@@ -19,6 +19,11 @@ public class TodoController {
         return todoService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public TodoResponse findById(@PathVariable Long userId) {
+        return todoService.findById(userId);
+    }
+
     @PostMapping
     public TodoResponse create(@RequestBody TodoRequest todoRequest) {
         return todoService.create(todoRequest);

@@ -1,12 +1,13 @@
 package org.example.todoweb.RequestDto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
 public class TodoRequest {
-    @NotNull
+    //@NotNull
+    private Long userId;
+    //@NotNull
     private String title;
-    @NotNull
+    //@NotNull
     private String description;
 }

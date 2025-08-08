@@ -3,7 +3,9 @@ package org.example.todoweb.Service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.todoweb.Entity.TodoEntity;
+import org.example.todoweb.Entity.UserEntity;
 import org.example.todoweb.Repository.TodoRepository;
+import org.example.todoweb.Repository.UserRepository;
 import org.example.todoweb.RequestDto.TodoRequest;
 import org.example.todoweb.ResponseDto.TodoResponse;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.List;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = true) //전체조회
     public List<TodoResponse> findAll() {
@@ -36,7 +39,8 @@ public class TodoService {
     }
 
     public TodoResponse create(TodoRequest todoRequest) { //생성
-        TodoEntity entity = todoRepository.save(new TodoEntity(todoRequest.getTitle(), todoRequest.getDescription()));
+        UserEntity userEntity = userRepository.findById(todoRequest.getUserId()).orElseThrow(()->new EntityNotFoundException("Todo not found"));
+        TodoEntity entity = todoRepository.save(new TodoEntity(userEntity,todoRequest.getTitle(), todoRequest.getDescription()));
         return new TodoResponse(entity);
     }
 

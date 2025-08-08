@@ -11,20 +11,21 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Table(name="members")
+@Table(name="todo")
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
 public class TodoEntity extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @ManyToOne
+    @JoinColumn(name = "user_entity_id")
+    private UserEntity userEntity;
     private String title;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 
-    public TodoEntity(String title, String description) {
+    public TodoEntity(UserEntity userEntity, String title, String description) {
+        this.userEntity = userEntity;
         this.title = title;
         this.description = description;
     }

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TodoResponse {
     private Long id;
+    private Long userId;
     private String title;
     private String description;
     private LocalDateTime createdAt;
@@ -17,6 +18,7 @@ public class TodoResponse {
 
     public TodoResponse(TodoEntity entity) {
         this.id = entity.getId();
+        this.userId = entity.getUserEntity().getId();
         this.title = entity.getTitle();
         this.description = entity.getDescription();
         this.createdAt = entity.getCreatedAt();
