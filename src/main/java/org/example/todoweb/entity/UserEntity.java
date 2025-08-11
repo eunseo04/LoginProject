@@ -1,4 +1,4 @@
-package org.example.todoweb.Entity;
+package org.example.todoweb.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserEntity {
+public class UserEntity extends BaseEntity{
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
@@ -21,8 +21,9 @@ public class UserEntity {
         this.email = email;
     }
 
-    public void update (String name, String email) {
+    public void update (String name, String email, String password) {
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 }

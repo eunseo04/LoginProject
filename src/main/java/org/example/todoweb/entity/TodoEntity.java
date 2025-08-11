@@ -1,13 +1,10 @@
-package org.example.todoweb.Entity;
+package org.example.todoweb.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.todoweb.RequestDto.TodoRequest;
-
-
-import java.time.LocalDateTime;
+import org.example.todoweb.requestDto.TodoRequest;
 
 @Entity
 @Getter

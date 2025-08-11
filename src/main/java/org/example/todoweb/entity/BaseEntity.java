@@ -1,4 +1,4 @@
-package org.example.todoweb.Entity;
+package org.example.todoweb.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

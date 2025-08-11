@@ -1,8 +1,8 @@
-package org.example.todoweb.ResponseDto;
+package org.example.todoweb.responseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.example.todoweb.Entity.TodoEntity;
+import org.example.todoweb.entity.TodoEntity;
 
 import java.time.LocalDateTime;
 

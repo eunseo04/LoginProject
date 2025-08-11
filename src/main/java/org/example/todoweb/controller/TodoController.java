@@ -1,9 +1,10 @@
-package org.example.todoweb.Controller;
+package org.example.todoweb.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.todoweb.RequestDto.TodoRequest;
-import org.example.todoweb.ResponseDto.TodoResponse;
-import org.example.todoweb.Service.TodoService;
+import org.example.todoweb.requestDto.TodoRequest;
+import org.example.todoweb.responseDto.TodoResponse;
+import org.example.todoweb.service.TodoService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -20,22 +21,22 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public TodoResponse findById(@PathVariable Long userId) {
-        return todoService.findById(userId);
+    public TodoResponse findById(@Valid @PathVariable Long id) {
+        return todoService.findById(id);
     }
 
     @PostMapping
-    public TodoResponse create(@RequestBody TodoRequest todoRequest) {
+    public TodoResponse create(@Valid @RequestBody TodoRequest todoRequest) {
         return todoService.create(todoRequest);
     }
 
     @PatchMapping
-    public TodoResponse update(@RequestParam Long id, @RequestBody TodoRequest todoRequest) {
+    public TodoResponse update(@Valid @RequestParam Long id, @Valid @RequestBody TodoRequest todoRequest) {
         return todoService.update(id, todoRequest);
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id) {
+    public void delete(@Valid @RequestParam Long id) {
         todoService.delete(id);
     }
 }
