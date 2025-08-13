@@ -21,22 +21,22 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public List<CommentResponse> findByUserId(@Valid @PathVariable Long id) {
+    public List<CommentResponse> findByUserId(@PathVariable Long id) {
         return commentService.findByUserId(id); //수정
     }
 
     @PostMapping("/{id}")
-    public CommentResponse create(@Valid @PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
+    public CommentResponse create(@PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
         return commentService.create(id, commentRequest);
     }
 
     @PatchMapping("/{id}")
-    public CommentResponse update(@Valid @PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
+    public CommentResponse update(@PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
         return commentService.update(id, commentRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@Valid @PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         commentService.delete(id);
     }
 }

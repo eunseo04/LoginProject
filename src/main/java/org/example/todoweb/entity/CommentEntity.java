@@ -13,14 +13,12 @@ public class CommentEntity extends BaseEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
     private String comment;
     @ManyToOne
     @JoinColumn(name = "todo_entity_id")
     private TodoEntity todoEntity;
 
     public CommentEntity(String comment, TodoEntity todoEntity) {
-        this.userId = todoEntity.getUserEntity().getId();
         this.comment = comment;
         this.todoEntity = todoEntity;
     }

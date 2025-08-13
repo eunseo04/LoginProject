@@ -4,13 +4,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.todoweb.entity.CommentEntity;
 import org.example.todoweb.entity.TodoEntity;
-import org.example.todoweb.entity.UserEntity;
 import org.example.todoweb.repository.CommentRepository;
 import org.example.todoweb.repository.TodoRepository;
 import org.example.todoweb.repository.UserRepository;
 import org.example.todoweb.requestDto.CommentRequest;
 import org.example.todoweb.responseDto.CommentResponse;
-import org.example.todoweb.responseDto.UserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +35,7 @@ public class CommentService {
     public List<CommentResponse> findByUserId(Long id) {
         userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("없는 회원입니다"));
         List<CommentResponse> list = new ArrayList<>();
-        for (CommentEntity entity :commentRepository.findByUserId(id)){
+        for (CommentEntity entity :commentRepository.findByTodoEntity_UserEntity_Id(id)){
             list.add(new CommentResponse(entity));
         }
         return list;

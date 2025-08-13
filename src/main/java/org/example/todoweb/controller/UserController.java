@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.todoweb.Const;
+import org.example.todoweb.entity.UserEntity;
 import org.example.todoweb.requestDto.UserRequest;
 import org.example.todoweb.responseDto.UserResponse;
 import org.example.todoweb.service.UserService;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserResponse findById(@Valid @PathVariable Long id) {
+    public UserResponse findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public UserResponse update(@Valid @PathVariable Long id, @Valid @RequestBody UserRequest userRequest, @SessionAttribute(name = Const.LOGIN_USER, required = false) UserResponse loginUser) {
+    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserRequest userRequest, @SessionAttribute(name = Const.LOGIN_USER, required = false) UserEntity loginUser) {
         // session에 loginUser가 없으면 에러 문구 출력
         if (loginUser == null) {
             throw new EntityNotFoundException("로그인 해주세요");
@@ -62,7 +63,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@Valid @PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         userService.delete(id);
     }
 

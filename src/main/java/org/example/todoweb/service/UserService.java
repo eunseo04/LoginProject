@@ -76,7 +76,7 @@ public class UserService {
     @Transactional //회원삭제
     public void delete(Long id) {
         userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("회원이 없습니다"));
-        List<CommentEntity> comments = commentRepository.findByUserId(id);
+        List<CommentEntity> comments = commentRepository.findByTodoEntity_UserEntity_Id(id);
         List<TodoEntity> todos = todoRepository.findByUserEntityId(id);
         commentRepository.deleteAll(comments);
         todoRepository.deleteAll(todos);

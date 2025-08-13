@@ -55,7 +55,7 @@ public class TodoService {
     @Transactional //삭제
     public void delete(Long id) {
         todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("일정이 없습니다"));
-        List<CommentEntity> comments = commentRepository.findByUserId(id);
+        List<CommentEntity> comments = commentRepository.findByTodoEntity_Id(id);
         commentRepository.deleteAll(comments);
         todoRepository.deleteById(id);
     }
