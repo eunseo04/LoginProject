@@ -28,9 +28,9 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public UserResponse findById(@PathVariable Long id) {
-        return userService.findById(id);
+    @GetMapping("/{userId}")
+    public UserResponse findById(@PathVariable Long userId) {
+        return userService.findById(userId);
     }
 
     @PostMapping("/signIn")
@@ -53,18 +53,18 @@ public class UserController {
         }
     }
 
-    @PatchMapping("/{id}")
-    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserRequest userRequest, @SessionAttribute(name = Const.LOGIN_USER, required = false) UserEntity loginUser) {
+    @PatchMapping("/{userId}")
+    public UserResponse update(@PathVariable Long userId, @Valid @RequestBody UserRequest userRequest, @SessionAttribute(name = Const.LOGIN_USER, required = false) UserEntity loginUser) {
         // session에 loginUser가 없으면 에러 문구 출력
         if (loginUser == null) {
             throw new EntityNotFoundException("로그인 해주세요");
         }
-        return userService.update(id, userRequest);
+        return userService.update(userId, userRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        userService.delete(id);
+    @DeleteMapping("/{userId}")
+    public void delete(@PathVariable Long userId) {
+        userService.delete(userId);
     }
 
 }

@@ -11,32 +11,31 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comments")
 public class CommentController {
     private final CommentService commentService;
 
-    @GetMapping
+    @GetMapping("/comments")
     public List<CommentResponse> allComments() {
         return commentService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public List<CommentResponse> findByUserId(@PathVariable Long id) {
-        return commentService.findByUserId(id); //수정
+    @GetMapping("/user/{userId}/comments")
+    public List<CommentResponse> findByUserId(@PathVariable Long userId) {
+        return commentService.findByUserId(userId); //수정
     }
 
-    @PostMapping("/{id}")
-    public CommentResponse create(@PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
-        return commentService.create(id, commentRequest);
+    @PostMapping("/todo/{todoId}/comments")
+    public CommentResponse create(@PathVariable Long todoId, @Valid @RequestBody CommentRequest commentRequest) {
+        return commentService.create(todoId, commentRequest);
     }
 
-    @PatchMapping("/{id}")
-    public CommentResponse update(@PathVariable Long id, @Valid @RequestBody CommentRequest commentRequest) {
-        return commentService.update(id, commentRequest);
+    @PatchMapping("/comments/{commentId}")
+    public CommentResponse update(@PathVariable Long commentId, @Valid @RequestBody CommentRequest commentRequest) {
+        return commentService.update(commentId, commentRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        commentService.delete(id);
+    @DeleteMapping("/comments/{commentId}")
+    public void delete(@PathVariable Long commentId) {
+        commentService.delete(commentId);
     }
 }

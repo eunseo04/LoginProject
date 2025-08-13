@@ -20,9 +20,9 @@ public class TodoController {
         return todoService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public TodoResponse findById(@PathVariable Long id) {
-        return todoService.findById(id);
+    @GetMapping("/{todoId}")
+    public TodoResponse findById(@PathVariable Long todoId) {
+        return todoService.findById(todoId);
     }
 
     @PostMapping
@@ -30,13 +30,13 @@ public class TodoController {
         return todoService.create(todoRequest);
     }
 
-    @PatchMapping("/{id}")
-    public TodoResponse update(@PathVariable Long id, @Valid @RequestBody TodoRequest todoRequest) {
-        return todoService.update(id, todoRequest);
+    @PatchMapping("/{todoId}")
+    public TodoResponse update(@PathVariable Long todoId, @Valid @RequestBody TodoRequest todoRequest) {
+        return todoService.update(todoId, todoRequest);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        todoService.delete(id);
+    @DeleteMapping("/{todoId}")
+    public void delete(@PathVariable Long todoId) {
+        todoService.delete(todoId);
     }
 }
