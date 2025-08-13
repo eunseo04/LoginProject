@@ -2,6 +2,8 @@ package org.example.todoweb.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.todoweb.Const;
+import org.example.todoweb.entity.UserEntity;
 import org.example.todoweb.requestDto.TodoRequest;
 import org.example.todoweb.responseDto.TodoResponse;
 import org.example.todoweb.service.TodoService;
@@ -26,8 +28,8 @@ public class TodoController {
     }
 
     @PostMapping
-    public TodoResponse create(@Valid @RequestBody TodoRequest todoRequest) {
-        return todoService.create(todoRequest);
+    public TodoResponse create(@Valid @RequestBody TodoRequest todoRequest, @SessionAttribute(name = Const.LOGIN_USER, required = false) UserEntity loginUser) {
+        return todoService.create(todoRequest, loginUser);
     }
 
     @PatchMapping("/{todoId}")
