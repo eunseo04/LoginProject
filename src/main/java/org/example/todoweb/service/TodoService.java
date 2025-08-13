@@ -40,9 +40,8 @@ public class TodoService {
         return new TodoResponse(todoEntity);
     }
 
-    public TodoResponse create(TodoRequest todoRequest, UserEntity userEntity1) { //생성
-        UserEntity userEntity2 = userRepository.findById(userEntity1.getId()).orElseThrow(()->new EntityNotFoundException("없는 회원입니다"));
-        TodoEntity entity = todoRepository.save(new TodoEntity(userEntity2,todoRequest.getTitle(), todoRequest.getDescription()));
+    public TodoResponse create(TodoRequest todoRequest, UserEntity userEntity) { //생성
+        TodoEntity entity = todoRepository.save(new TodoEntity(userEntity,todoRequest.getTitle(), todoRequest.getDescription()));
         return new TodoResponse(entity);
     }
 
