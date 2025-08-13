@@ -2,8 +2,10 @@ package org.example.todoweb.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.example.todoweb.entity.CommentEntity;
 import org.example.todoweb.entity.TodoEntity;
 import org.example.todoweb.entity.UserEntity;
+import org.example.todoweb.repository.CommentRepository;
 import org.example.todoweb.repository.TodoRepository;
 import org.example.todoweb.repository.UserRepository;
 import org.example.todoweb.requestDto.TodoRequest;
@@ -17,7 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TodoService {
-
+    private final CommentRepository commentRepository;
     private final TodoRepository todoRepository;
     private final UserRepository userRepository;
 
@@ -34,8 +36,7 @@ public class TodoService {
     @Transactional(readOnly = true) //id조회
     public TodoResponse findById(Long id) {
         TodoEntity todoEntity = todoRepository.findById(id).orElseThrow(()->new EntityNotFoundException("일정이 없습니다"));
-        TodoResponse todoResponse = new TodoResponse(todoEntity);
-        return todoResponse;
+        return new TodoResponse(todoEntity);
     }
 
     public TodoResponse create(TodoRequest todoRequest) { //생성
@@ -53,6 +54,9 @@ public class TodoService {
 
     @Transactional //삭제
     public void delete(Long id) {
+        todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("일정이 없습니다"));
+        List<CommentEntity> comments = commentRepository.findByUserId(id);
+        commentRepository.deleteAll(comments);
         todoRepository.deleteById(id);
     }
 }

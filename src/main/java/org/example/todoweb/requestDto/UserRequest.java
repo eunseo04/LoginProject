@@ -1,13 +1,13 @@
 package org.example.todoweb.requestDto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import org.hibernate.validator.constraints.Range;
 
 @Getter
 public class UserRequest {
     @NotEmpty
-    @Range(min = 1, max = 4) //유저명은 4글자 이내
+    @Size(min = 1, max = 10) //유저명은 10글자 이내
     private String name;
     @NotEmpty
     private String email;

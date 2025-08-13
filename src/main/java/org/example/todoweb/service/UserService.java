@@ -6,7 +6,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.todoweb.Const;
 import org.example.todoweb.PasswordEncoder;
+import org.example.todoweb.entity.CommentEntity;
+import org.example.todoweb.entity.TodoEntity;
 import org.example.todoweb.entity.UserEntity;
+import org.example.todoweb.repository.CommentRepository;
+import org.example.todoweb.repository.TodoRepository;
 import org.example.todoweb.repository.UserRepository;
 import org.example.todoweb.requestDto.UserRequest;
 import org.example.todoweb.responseDto.UserResponse;
@@ -22,6 +26,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final TodoRepository todoRepository;
+    private final CommentRepository commentRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
@@ -69,6 +75,11 @@ public class UserService {
 
     @Transactional //회원삭제
     public void delete(Long id) {
+        userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("회원이 없습니다"));
+        List<CommentEntity> comments = commentRepository.findByUserId(id);
+        List<TodoEntity> todos = todoRepository.findByUserEntityId(id);
+        commentRepository.deleteAll(comments);
+        todoRepository.deleteAll(todos);
         userRepository.deleteById(id);
     }
 }

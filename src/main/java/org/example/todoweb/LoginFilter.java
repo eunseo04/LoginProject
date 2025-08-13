@@ -39,7 +39,7 @@ public class LoginFilter implements Filter {
 
             // 로그인하지 않은 사용자인 경우
             if (session == null || session.getAttribute(Const.LOGIN_USER) == null) {
-                throw new RuntimeException("로그인 해주세요.");
+                httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
 
             // 로그인 성공 로직
@@ -50,7 +50,6 @@ public class LoginFilter implements Filter {
         // 2번경우 : 필터 로직 통과 후 다음 필터 호출 chain.doFilter()
         // 다음 필터 없으면 Servlet -> Controller 호출
         chain.doFilter(request, response);
-
 
     }
 

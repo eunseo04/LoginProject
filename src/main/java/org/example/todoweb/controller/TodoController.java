@@ -21,7 +21,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public TodoResponse findById(@Valid @PathVariable Long id) {
+    public TodoResponse findById(@PathVariable Long id) {
         return todoService.findById(id);
     }
 
@@ -30,13 +30,13 @@ public class TodoController {
         return todoService.create(todoRequest);
     }
 
-    @PatchMapping
-    public TodoResponse update(@Valid @RequestParam Long id, @Valid @RequestBody TodoRequest todoRequest) {
+    @PatchMapping("/{id}")
+    public TodoResponse update(@PathVariable Long id, @Valid @RequestBody TodoRequest todoRequest) {
         return todoService.update(id, todoRequest);
     }
 
-    @DeleteMapping
-    public void delete(@Valid @RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
         todoService.delete(id);
     }
 }

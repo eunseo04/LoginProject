@@ -61,7 +61,7 @@ public class UserController {
         return userService.update(id, userRequest);
     }
 
-    @DeleteMapping("/{id}/quit")
+    @DeleteMapping("/{id}")
     public void delete(@Valid @PathVariable Long id) {
         userService.delete(id);
     }
