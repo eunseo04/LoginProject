@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.todoweb.entity.CommentEntity;
 import org.example.todoweb.entity.TodoEntity;
+import org.example.todoweb.entity.UserEntity;
 import org.example.todoweb.repository.CommentRepository;
 import org.example.todoweb.repository.TodoRepository;
 import org.example.todoweb.repository.UserRepository;
@@ -42,9 +43,9 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentResponse create(Long id, CommentRequest commentRequest) {
+    public CommentResponse create(Long id, CommentRequest commentRequest, UserEntity userEntity) {
         TodoEntity todoEntity = todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("일정이 없습니다"));
-        CommentEntity entity = commentRepository.save(new CommentEntity(commentRequest.getComment(), todoEntity));
+        CommentEntity entity = commentRepository.save(new CommentEntity(commentRequest.getComment(), todoEntity, userEntity));
         return new CommentResponse(entity);
     }
 

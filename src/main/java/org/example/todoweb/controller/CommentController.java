@@ -2,6 +2,7 @@ package org.example.todoweb.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.todoweb.entity.UserEntity;
 import org.example.todoweb.requestDto.CommentRequest;
 import org.example.todoweb.responseDto.CommentResponse;
 import org.example.todoweb.service.CommentService;
@@ -25,8 +26,8 @@ public class CommentController {
     }
 
     @PostMapping("/todo/{todoId}/comments")
-    public CommentResponse create(@PathVariable Long todoId, @Valid @RequestBody CommentRequest commentRequest) {
-        return commentService.create(todoId, commentRequest);
+    public CommentResponse create(@PathVariable Long todoId, @Valid @RequestBody CommentRequest commentRequest, @SessionAttribute UserEntity userEntity) {
+        return commentService.create(todoId, commentRequest, userEntity);
     }
 
     @PatchMapping("/comments/{commentId}")

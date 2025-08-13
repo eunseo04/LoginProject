@@ -18,9 +18,14 @@ public class CommentEntity extends BaseEntity {
     @JoinColumn(name = "todo_entity_id")
     private TodoEntity todoEntity;
 
-    public CommentEntity(String comment, TodoEntity todoEntity) {
+    @ManyToOne
+    @JoinColumn(name = "user_entity_id")
+    private UserEntity userEntity;
+
+    public CommentEntity(String comment, TodoEntity todoEntity, UserEntity userEntity) {
         this.comment = comment;
         this.todoEntity = todoEntity;
+        this.userEntity = userEntity;
     }
 
     public void update(String comment) {

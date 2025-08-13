@@ -19,7 +19,7 @@ public class CommentResponse {
 
     public CommentResponse(CommentEntity commentEntity) {
         this.id = commentEntity.getId();
-        this.userId = commentEntity.getTodoEntity().getUserEntity().getId();
+        this.userId = commentEntity.getUserEntity().getId();
         this.todoId = commentEntity.getTodoEntity().getId();
         this.comment = commentEntity.getComment();
         this.createdAt = commentEntity.getCreatedAt();
