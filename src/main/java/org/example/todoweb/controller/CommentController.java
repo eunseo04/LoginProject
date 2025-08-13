@@ -16,7 +16,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("/comments")
-    public List<CommentResponse> allComments() {
+    public List<CommentResponse> findAll() {
         return commentService.findAll();
     }
 
